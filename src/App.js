@@ -1,8 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
+import FolderFormat from "./FolderFormat";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <FolderFormat />
+    </div>
+  );
 }
 
 export default App;
