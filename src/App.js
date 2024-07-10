@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FolderFormat from "./FolderFormat";
 import { folderStructure } from "./folderStructure";
+import FolderFormat from "./component/FolderStructureContainer/FolderFormat";
 
 function App() {
   const [explorer, setExplorer] = useState(folderStructure);

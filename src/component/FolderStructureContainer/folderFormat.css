@@ -1,0 +1,11 @@
+.folder-container,
+.file-container {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin: 10px 5px;
+}
+
+.input-container {
+  margin-left: 25px;
+}
