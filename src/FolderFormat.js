@@ -1,39 +1,45 @@
 import React, { useState } from "react";
-import { folderStructure } from "./folderStructure";
 
-const FolderFormat = () => {
-  const data = folderStructure[0];
-  const [showInput, setShowInput] = useState(false);
+const FolderFormat = ({ explorer }) => {
+  const [showRootChildern, setShowRootChildern] = useState(false);
 
   const handleAddFileOrFolder = () => {
-    setShowInput(true);
+    setShowRootChildern(true);
   };
 
-  return (
-    <div
-      onBlur={() => {
-        setShowInput(false);
-      }}
-    >
-      <div style={{ display: "flex" }}>
-        {data.isFolder ? "📂" : "🗄"}
-        <div>{data.folderName}</div>
-        <button onClick={handleAddFileOrFolder}>Add file</button>
-        <button onClick={handleAddFileOrFolder}>Add folder</button>
-      </div>
-      {showInput ? (
-        <input
-          onClick={(e) => {
-            console.log(e);
-            e.stopPropagation();
-            setShowInput(true);
+  if (explorer.isFolder) {
+    return (
+      <div>
+        <div style={{ display: "flex" }}>
+          <div
+            onClick={() => {
+              setShowRootChildern(!showRootChildern);
+            }}
+          >
+            📂 {explorer.folderName}
+          </div>
+          {/* <button onClick={handleAddFileOrFolder}>Add file</button>
+        <button onClick={handleAddFileOrFolder}>Add folder</button> */}
+        </div>
+        <div
+          style={{
+            display: showRootChildern ? "block" : "none",
+            marginLeft: "25px",
           }}
-        ></input>
-      ) : (
-        ""
-      )}
-    </div>
-  );
+        >
+          {explorer.childerItems.map((exp) => {
+            return <FolderFormat explorer={exp} />;
+          })}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <span style={{ display: "flex", flexDirection: "column" }}>
+        📰{explorer.folderName}
+      </span>
+    );
+  }
 };
 
 export default FolderFormat;
