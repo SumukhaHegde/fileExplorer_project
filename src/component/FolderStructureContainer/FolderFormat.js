@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./folderFormat.css";
 
-const FolderFormat = ({ explorer }) => {
+const FolderFormat = ({ explorer, handleInsertNode }) => {
   const [showRootChildern, setShowRootChildern] = useState(false);
   const [showInput, setShowInput] = useState({
     visible: false,
@@ -15,6 +15,7 @@ const FolderFormat = ({ explorer }) => {
 
   const onFileOrFolderAdd = (e) => {
     if (e.key === "Enter" && e.target.value) {
+      handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
       setShowInput({ ...showInput, visible: false });
     }
   };
@@ -28,7 +29,7 @@ const FolderFormat = ({ explorer }) => {
               setShowRootChildern(!showRootChildern);
             }}
           >
-            <span>📂 {explorer.folderName}</span>
+            <span style={{ cursor: "pointer" }}>📂 {explorer.folderName}</span>
           </div>
           <div style={{ display: "flex", gap: "5px" }}>
             <button onClick={() => handleAddFileOrFolder(true)}>
@@ -55,7 +56,7 @@ const FolderFormat = ({ explorer }) => {
           }}
         >
           {explorer.childerItems.map((exp) => {
-            return <FolderFormat explorer={exp} />;
+            return <FolderFormat explorer={exp} key={exp.id} />;
           })}
         </div>
       </div>
