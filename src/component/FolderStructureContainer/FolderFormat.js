@@ -15,8 +15,10 @@ const FolderFormat = ({ explorer, handleInsertNode }) => {
 
   const onFileOrFolderAdd = (e) => {
     if (e.key === "Enter" && e.target.value) {
+      debugger;
       handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
       setShowInput({ ...showInput, visible: false });
+      console.log(explorer);
     }
   };
 
@@ -56,7 +58,13 @@ const FolderFormat = ({ explorer, handleInsertNode }) => {
           }}
         >
           {explorer.childerItems.map((exp) => {
-            return <FolderFormat explorer={exp} key={exp.id} />;
+            return (
+              <FolderFormat
+                key={exp.id}
+                explorer={exp}
+                handleInsertNode={handleInsertNode}
+              />
+            );
           })}
         </div>
       </div>

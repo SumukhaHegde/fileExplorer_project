@@ -5,6 +5,7 @@ const useTraverseHook = () => {
     dataToAdd,
     isFolder
   ) {
+    debugger;
     if (originalFileStructure.id === folderId) {
       originalFileStructure.childerItems.unshift({
         id: Math.floor(Math.random() * 1000),
@@ -14,6 +15,12 @@ const useTraverseHook = () => {
       });
       return originalFileStructure;
     }
+
+    originalFileStructure.childerItems.map((childItem) =>
+      addDataInTheFolderStructure(childItem, folderId, dataToAdd, isFolder)
+    );
+
+    return originalFileStructure;
   }
 
   return { addDataInTheFolderStructure };

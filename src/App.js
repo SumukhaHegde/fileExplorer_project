@@ -16,7 +16,6 @@ function App() {
       isFolder
     );
     setExplorer(newExplorer);
-    console.log(newExplorer);
   };
   return (
     <div className="App">
