@@ -5,7 +5,6 @@ const useTraverseHook = () => {
     dataToAdd,
     isFolder
   ) {
-    debugger;
     if (originalFileStructure.id === folderId) {
       originalFileStructure.childerItems.unshift({
         id: Math.floor(Math.random() * 1000),
@@ -23,7 +22,19 @@ const useTraverseHook = () => {
     return originalFileStructure;
   }
 
-  return { addDataInTheFolderStructure };
+  function deleteDataInFolderStructure(originalFolderStructure, folderId) {
+    const newStructure = originalFolderStructure.childerItems.filter(
+      (childItem) => childItem.id !== folderId
+    );
+
+    originalFolderStructure.childerItems = newStructure;
+    return originalFolderStructure;
+    //deleteDataInFolderStructure(originalFolderStructure.childerItems, folderId);
+
+    //return originalFolderStructure;
+  }
+
+  return { addDataInTheFolderStructure, deleteDataInFolderStructure };
 };
 
 export default useTraverseHook;

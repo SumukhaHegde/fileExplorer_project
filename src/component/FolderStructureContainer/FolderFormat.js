@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./folderFormat.css";
 
-const FolderFormat = ({ explorer, handleInsertNode }) => {
+const FolderFormat = ({ explorer, handleInsertNode, handleDeleteNode }) => {
   const [showRootChildern, setShowRootChildern] = useState(false);
   const [showInput, setShowInput] = useState({
     visible: false,
@@ -15,11 +15,14 @@ const FolderFormat = ({ explorer, handleInsertNode }) => {
 
   const onFileOrFolderAdd = (e) => {
     if (e.key === "Enter" && e.target.value) {
-      debugger;
       handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
       setShowInput({ ...showInput, visible: false });
-      console.log(explorer);
     }
+  };
+
+  const handleDelete = (id) => {
+    console.log("delete");
+    handleDeleteNode(id);
   };
 
   if (explorer.isFolder) {
@@ -38,6 +41,13 @@ const FolderFormat = ({ explorer, handleInsertNode }) => {
               + folder
             </button>
             <button onClick={() => handleAddFileOrFolder(false)}>+ file</button>
+            <button
+              onClick={() => {
+                handleDelete(explorer.id);
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
         {showInput.visible && (
@@ -63,6 +73,7 @@ const FolderFormat = ({ explorer, handleInsertNode }) => {
                 key={exp.id}
                 explorer={exp}
                 handleInsertNode={handleInsertNode}
+                handleDeleteNode={handleDeleteNode}
               />
             );
           })}

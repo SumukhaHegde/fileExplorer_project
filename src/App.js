@@ -1,25 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { folderStructure } from "./folderStructure";
 import FolderFormat from "./component/FolderStructureContainer/FolderFormat";
 import useTraverseHook from "./component/CustomHooks/useTraverseHook";
 
 function App() {
   const [explorer, setExplorer] = useState(folderStructure);
+  const dupExplorer = folderStructure;
 
-  const { addDataInTheFolderStructure } = useTraverseHook();
+  const { addDataInTheFolderStructure, deleteDataInFolderStructure } =
+    useTraverseHook();
 
   const handleInsertNode = (folderId, itemData, isFolder) => {
+    debugger;
     const newExplorer = addDataInTheFolderStructure(
-      explorer,
+      dupExplorer,
       folderId,
       itemData,
       isFolder
     );
+    //setExplorer(newExplorer);
+  };
+
+  const handleDeleteNode = (folderId) => {
+    const newExplorer = deleteDataInFolderStructure(explorer, folderId);
     setExplorer(newExplorer);
   };
+
+  // useEffect(() => {
+  //   setDupExplorer(explorer);
+  // }, [explorer]);
+
   return (
     <div className="App">
-      <FolderFormat explorer={explorer} handleInsertNode={handleInsertNode} />
+      <FolderFormat
+        explorer={explorer}
+        handleInsertNode={handleInsertNode}
+        handleDeleteNode={handleDeleteNode}
+      />
     </div>
   );
 }
