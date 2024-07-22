@@ -5,15 +5,12 @@ import useTraverseHook from "./component/CustomHooks/useTraverseHook";
 
 function App() {
   const [explorer, setExplorer] = useState(folderStructure);
-  const dupExplorer = folderStructure;
 
   const { addDataInTheFolderStructure, deleteDataInFolderStructure } =
     useTraverseHook();
 
   const handleInsertNode = (folderId, itemData, isFolder) => {
-    debugger;
     const newExplorer = addDataInTheFolderStructure(
-      dupExplorer,
       folderId,
       itemData,
       isFolder
