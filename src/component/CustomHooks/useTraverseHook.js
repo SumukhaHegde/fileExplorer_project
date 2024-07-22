@@ -6,20 +6,25 @@ const useTraverseHook = () => {
     isFolder
   ) {
     if (originalFileStructure.id === folderId) {
-      originalFileStructure.childerItems.unshift({
+      const newAddedChild = {
         id: Math.floor(Math.random() * 1000),
         folderName: dataToAdd,
         isFolder: isFolder,
         childerItems: [],
-      });
-      return originalFileStructure;
+      };
+
+      return {
+        ...originalFileStructure,
+        childerItems: [newAddedChild, ...originalFileStructure.childerItems],
+      };
     }
 
-    originalFileStructure.childerItems.map((childItem) =>
-      addDataInTheFolderStructure(childItem, folderId, dataToAdd, isFolder)
+    const newFileStructure = originalFileStructure.childerItems.map(
+      (childItem) =>
+        addDataInTheFolderStructure(childItem, folderId, dataToAdd, isFolder)
     );
 
-    return originalFileStructure;
+    return { ...originalFileStructure, childerItems: newFileStructure };
   }
 
   function deleteDataInFolderStructure(originalFolderStructure, folderId) {

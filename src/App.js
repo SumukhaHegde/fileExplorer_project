@@ -9,23 +9,21 @@ function App() {
   const { addDataInTheFolderStructure, deleteDataInFolderStructure } =
     useTraverseHook();
 
+  console.log(explorer);
   const handleInsertNode = (folderId, itemData, isFolder) => {
     const newExplorer = addDataInTheFolderStructure(
+      explorer,
       folderId,
       itemData,
       isFolder
     );
-    //setExplorer(newExplorer);
+    setExplorer(newExplorer);
   };
 
   const handleDeleteNode = (folderId) => {
     const newExplorer = deleteDataInFolderStructure(explorer, folderId);
     setExplorer(newExplorer);
   };
-
-  // useEffect(() => {
-  //   setDupExplorer(explorer);
-  // }, [explorer]);
 
   return (
     <div className="App">
