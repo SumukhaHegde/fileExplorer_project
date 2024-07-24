@@ -33,10 +33,10 @@ const useTraverseHook = () => {
     );
 
     originalFolderStructure.childerItems = newStructure;
-    return originalFolderStructure;
-    //deleteDataInFolderStructure(originalFolderStructure.childerItems, folderId);
-
     //return originalFolderStructure;
+    deleteDataInFolderStructure(originalFolderStructure.childerItems, folderId);
+
+    return originalFolderStructure;
   }
 
   return { addDataInTheFolderStructure, deleteDataInFolderStructure };
